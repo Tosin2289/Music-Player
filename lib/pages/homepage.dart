@@ -54,32 +54,48 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: 100,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.only(bottom: 4),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12)),
-                      child: ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        tileColor: bgColor,
-                        leading: const Icon(Icons.music_note,
-                            color: whiteColor, size: 32),
-                        title: Text(
-                          "${snapshot.data![index].displayNameWOExt}",
-                          style: const TextStyle(
-                              fontSize: 15, color: Colors.white),
-                        ),
-                        subtitle: Text(
-                          "${snapshot.data![index].artist}",
-                          style: const TextStyle(
-                              fontSize: 12, color: Colors.white),
-                        ),
-                        trailing: const Icon(
-                          Icons.play_arrow,
-                          color: whiteColor,
-                          size: 26,
+                      child: Obx(
+                        () => ListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          tileColor: bgColor,
+                          leading: QueryArtworkWidget(
+                            id: snapshot.data![index].id,
+                            type: ArtworkType.AUDIO,
+                            nullArtworkWidget: const Icon(
+                              Icons.music_note,
+                              color: whiteColor,
+                              size: 32,
+                            ),
+                          ),
+                          title: Text(
+                            snapshot.data![index].displayNameWOExt,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            "${snapshot.data![index].artist}",
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.white),
+                          ),
+                          trailing: controller.playIndex.value == index &&
+                                  controller.isPlaying.value
+                              ? const Icon(
+                                  Icons.play_arrow,
+                                  color: whiteColor,
+                                  size: 26,
+                                )
+                              : null,
+                          onTap: () {
+                            controller.playSong(
+                                snapshot.data![index].uri, index);
+                          },
                         ),
                       ),
                     );
