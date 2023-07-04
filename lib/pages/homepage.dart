@@ -72,11 +72,11 @@ class HomePage extends StatelessWidget {
                             color: whiteColor, size: 32),
                         title: Text(
                           "${snapshot.data![index].displayNameWOExt}",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
+                          style:const  TextStyle(fontSize: 15, color: Colors.white),
                         ),
                         subtitle: Text(
                           "${snapshot.data![index].artist}",
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: const TextStyle(fontSize: 12, color: Colors.white),
                         ),
                         trailing: const Icon(
                           Icons.play_arrow,
