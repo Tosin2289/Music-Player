@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_app/controllers/playercontroller.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
+import 'package:lottie/lottie.dart';
 import '../const/colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,11 +41,7 @@ class HomePage extends StatelessWidget {
               uriType: UriType.EXTERNAL),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              );
+              return Center(child: Lottie.asset('assets/loading.json'));
             } else if (snapshot.data!.isEmpty) {
               return const Center(
                 child: Text(
@@ -72,11 +68,13 @@ class HomePage extends StatelessWidget {
                             color: whiteColor, size: 32),
                         title: Text(
                           "${snapshot.data![index].displayNameWOExt}",
-                          style:const  TextStyle(fontSize: 15, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 15, color: Colors.white),
                         ),
                         subtitle: Text(
                           "${snapshot.data![index].artist}",
-                          style: const TextStyle(fontSize: 12, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 12, color: Colors.white),
                         ),
                         trailing: const Icon(
                           Icons.play_arrow,
