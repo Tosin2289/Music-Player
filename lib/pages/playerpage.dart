@@ -87,23 +87,37 @@ class _PlayerPageState extends State<PlayerPage> {
                       height: 12,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon:
-                              const Icon(Icons.skip_previous_rounded, size: 40),
+                          icon: const Icon(
+                            Icons.skip_previous_rounded,
+                            size: 40,
+                            color: bgDarkColor,
+                          ),
                         ),
                         CircleAvatar(
+                          radius: 35,
                           backgroundColor: bgDarkColor,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon:
-                                const Icon(Icons.play_arrow_rounded, size: 54),
+                          child: Transform.scale(
+                            scale: 2.5,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.play_arrow_rounded,
+                                color: whiteColor,
+                              ),
+                            ),
                           ),
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: const Icon(Icons.skip_next_rounded, size: 40),
+                          icon: const Icon(
+                            Icons.skip_next_rounded,
+                            size: 40,
+                            color: bgDarkColor,
+                          ),
                         ),
                       ],
                     ),
