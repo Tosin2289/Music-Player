@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_app/controllers/playercontroller.dart';
+import 'package:music_app/pages/playerpage.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:lottie/lottie.dart';
 import '../const/colors.dart';
@@ -93,8 +94,9 @@ class HomePage extends StatelessWidget {
                                 )
                               : null,
                           onTap: () {
-                            controller.playSong(
-                                snapshot.data![index].uri, index);
+                            Get.to(() => const PlayerPage());
+                            // controller.playSong(
+                            //     snapshot.data![index].uri, index);
                           },
                         ),
                       ),
