@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:music_app/const/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import '../controllers/playercontroller.dart';
 
 class PlayerPage extends StatefulWidget {
   final SongModel data;
-
   const PlayerPage({
     Key? key,
     required this.data,
@@ -19,7 +16,7 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  var controller = Get.find<PlayerController>;
+  var controller = Get.put(PlayerController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +37,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 ),
                 alignment: Alignment.center,
                 child: QueryArtworkWidget(
-                  id: data.id,
+                  id: widget.data.id,
                   type: ArtworkType.AUDIO,
                   artworkHeight: double.infinity,
                   artworkWidth: double.infinity,
@@ -66,7 +63,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 child: Column(
                   children: [
                     Text(
-                      data.name,
+                      widget.data.displayNameWOExt,
                       style: const TextStyle(
                           color: bgDarkColor,
                           fontSize: 24,
@@ -76,7 +73,7 @@ class _PlayerPageState extends State<PlayerPage> {
                       height: 12,
                     ),
                     Text(
-                      data.artist,
+                      "${widget.data.artist}",
                       style: const TextStyle(
                           color: bgDarkColor,
                           fontSize: 20,
@@ -121,31 +118,36 @@ class _PlayerPageState extends State<PlayerPage> {
                             color: bgDarkColor,
                           ),
                         ),
-                        CircleAvatar(
-                          radius: 35,
-                          backgroundColor: bgDarkColor,
-                          child: Transform.scale(
-                              scale: 2.5,
-                              child: controller.isPlaying.value
-                                  ? IconButton(
-                                      onPressed: () {
-                                        if (controller.isPlaying.value) {
-                                          controller.audioPlayer.pause();
-                                          controller.isPlaying(false);
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.pause,
-                                        color: whiteColor,
-                                      ),
-                                    )
-                                  : IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.pause,
-                                        color: whiteColor,
-                                      ),
-                                    )),
+                        Obx(
+                          () => CircleAvatar(
+                            radius: 35,
+                            backgroundColor: bgDarkColor,
+                            child: Transform.scale(
+                                scale: 2.5,
+                                child: controller.isPlaying.value
+                                    ? IconButton(
+                                        onPressed: () {
+                                          if (controller.isPlaying.value) {
+                                            controller.audioPlayer.pause();
+                                            controller.isPlaying(false);
+                                          } else {
+                                            controller.audioPlayer.play();
+                                            controller.isPlaying(true);
+                                          }
+                                        },
+                                        icon: const Icon(
+                                          Icons.pause,
+                                          color: whiteColor,
+                                        ),
+                                      )
+                                    : IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.pause,
+                                          color: whiteColor,
+                                        ),
+                                      )),
+                          ),
                         ),
                         IconButton(
                           onPressed: () {},
