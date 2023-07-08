@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:music_app/const/colors.dart';
+import 'package:on_audio_query/on_audio_query.dart';
+
+import '../controllers/playercontroller.dart';
 
 class PlayerPage extends StatefulWidget {
-  const PlayerPage({Key? key}) : super(key: key);
+  final SongModel data;
+
+  const PlayerPage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   State<PlayerPage> createState() => _PlayerPageState();
 }
 
 class _PlayerPageState extends State<PlayerPage> {
+  var controller = Get.find<PlayerController>;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +31,25 @@ class _PlayerPageState extends State<PlayerPage> {
           children: [
             Expanded(
               child: Container(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                height: 300,
+                width: 300,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
                 ),
                 alignment: Alignment.center,
-                child: const Icon(Icons.music_note),
+                child: QueryArtworkWidget(
+                  id: data.id,
+                  type: ArtworkType.AUDIO,
+                  artworkHeight: double.infinity,
+                  artworkWidth: double.infinity,
+                  nullArtworkWidget: const Icon(
+                    Icons.music_note,
+                    size: 54,
+                    color: whiteColor,
+                  ),
+                ),
               ),
             ),
             const SizedBox(
@@ -41,9 +65,9 @@ class _PlayerPageState extends State<PlayerPage> {
                         BorderRadius.vertical(top: Radius.circular(16))),
                 child: Column(
                   children: [
-                    const Text(
-                      "Music name",
-                      style: TextStyle(
+                    Text(
+                      data.name,
+                      style: const TextStyle(
                           color: bgDarkColor,
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
@@ -51,9 +75,9 @@ class _PlayerPageState extends State<PlayerPage> {
                     const SizedBox(
                       height: 12,
                     ),
-                    const Text(
-                      "Artist name",
-                      style: TextStyle(
+                    Text(
+                      data.artist,
+                      style: const TextStyle(
                           color: bgDarkColor,
                           fontSize: 20,
                           fontWeight: FontWeight.normal),
@@ -101,15 +125,27 @@ class _PlayerPageState extends State<PlayerPage> {
                           radius: 35,
                           backgroundColor: bgDarkColor,
                           child: Transform.scale(
-                            scale: 2.5,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.play_arrow_rounded,
-                                color: whiteColor,
-                              ),
-                            ),
-                          ),
+                              scale: 2.5,
+                              child: controller.isPlaying.value
+                                  ? IconButton(
+                                      onPressed: () {
+                                        if (controller.isPlaying.value) {
+                                          controller.audioPlayer.pause();
+                                          controller.isPlaying(false);
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.pause,
+                                        color: whiteColor,
+                                      ),
+                                    )
+                                  : IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.pause,
+                                        color: whiteColor,
+                                      ),
+                                    )),
                         ),
                         IconButton(
                           onPressed: () {},

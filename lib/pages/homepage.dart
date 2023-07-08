@@ -94,9 +94,13 @@ class HomePage extends StatelessWidget {
                                 )
                               : null,
                           onTap: () {
-                            Get.to(() => const PlayerPage());
-                            // controller.playSong(
-                            //     snapshot.data![index].uri, index);
+                            Get.to(() => PlayerPage(
+                                  data: snapshot.data![index],
+                                ));
+                            controller.playSong(
+                                snapshot.data![index].uri, index);
+                            transition:
+                            Transition.downToUp;
                           },
                         ),
                       ),
