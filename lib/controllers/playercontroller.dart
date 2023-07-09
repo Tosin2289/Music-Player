@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -8,10 +9,27 @@ class PlayerController extends GetxController {
   final audioPlayer = AudioPlayer();
   var playIndex = 0.obs;
   var isPlaying = false.obs;
+  var duration = ''.obs;
+  var position = ''.obs;
+  var max = 0.0.obs;
   @override
   void onInit() {
     super.onInit();
     checkPermission();
+  }
+
+  updateposition() {
+    audioPlayer.durationStream.listen((event) {
+      duration.value = event.toString().split(".")[0];
+    });
+    audioPlayer.positionStream.listen((p) {
+      position.value = p.toString().split(".")[0];
+    });
+  }
+
+  changeDurationToSeconds(seconds) {
+    var duration = Duration(seconds: seconds);
+    audioPlayer.seek(duration);
   }
 
   playSong(String? uri, index) {
@@ -20,6 +38,7 @@ class PlayerController extends GetxController {
       audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
       audioPlayer.play();
       isPlaying(true);
+      updateposition();
     } on Exception catch (e) {
       print(e.toString());
     }

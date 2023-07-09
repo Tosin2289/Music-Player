@@ -82,27 +82,33 @@ class _PlayerPageState extends State<PlayerPage> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Row(
-                      children: [
-                        const Text(
-                          "0.0",
-                          style: TextStyle(
-                            color: bgDarkColor,
+                    Obx(
+                      () => Row(
+                        children: [
+                          Text(
+                            controller.position.value,
+                            style: const TextStyle(
+                              color: bgDarkColor,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Slider(
-                              thumbColor: sliderColor,
-                              activeColor: sliderColor,
-                              inactiveColor: bgColor,
-                              value: 0.0,
-                              onChanged: (newValue) {}),
-                        ),
-                        const Text(
-                          "04:00",
-                          style: TextStyle(color: bgDarkColor),
-                        )
-                      ],
+                          Expanded(
+                            child: Slider(
+                                thumbColor: sliderColor,
+                                activeColor: sliderColor,
+                                inactiveColor: bgColor,
+                                value: 0.0,
+                                onChanged: (newValue) {
+                                  controller.changeDurationToSeconds(
+                                      newValue.toInt());
+                                  newValue = newValue;
+                                }),
+                          ),
+                          Text(
+                            controller.duration.value,
+                            style: const TextStyle(color: bgDarkColor),
+                          )
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 12,
@@ -143,7 +149,7 @@ class _PlayerPageState extends State<PlayerPage> {
                                     : IconButton(
                                         onPressed: () {},
                                         icon: const Icon(
-                                          Icons.pause,
+                                          Icons.play_arrow,
                                           color: whiteColor,
                                         ),
                                       )),
