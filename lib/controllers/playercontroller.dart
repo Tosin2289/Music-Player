@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -12,6 +11,7 @@ class PlayerController extends GetxController {
   var duration = ''.obs;
   var position = ''.obs;
   var max = 0.0.obs;
+  var value = 0.0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -21,9 +21,11 @@ class PlayerController extends GetxController {
   updateposition() {
     audioPlayer.durationStream.listen((event) {
       duration.value = event.toString().split(".")[0];
+      max.value = event!.inSeconds.toDouble();
     });
     audioPlayer.positionStream.listen((p) {
       position.value = p.toString().split(".")[0];
+      value.value = p!.inSeconds.toDouble();
     });
   }
 
