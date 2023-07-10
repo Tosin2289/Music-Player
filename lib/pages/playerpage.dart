@@ -166,7 +166,15 @@ class _PlayerPageState extends State<PlayerPage> {
                                           ),
                                         )
                                       : IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            if (controller.isPlaying.value) {
+                                              controller.audioPlayer.pause();
+                                              controller.isPlaying(false);
+                                            } else {
+                                              controller.audioPlayer.play();
+                                              controller.isPlaying(true);
+                                            }
+                                          },
                                           icon: const Icon(
                                             Icons.play_arrow,
                                             color: whiteColor,
