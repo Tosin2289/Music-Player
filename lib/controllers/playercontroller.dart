@@ -25,7 +25,7 @@ class PlayerController extends GetxController {
     });
     audioPlayer.positionStream.listen((p) {
       position.value = p.toString().split(".")[0];
-      value.value = p!.inSeconds.toDouble();
+      value.value = p.inSeconds.toDouble();
     });
   }
 
