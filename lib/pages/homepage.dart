@@ -6,12 +6,18 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:lottie/lottie.dart';
 import '../const/colors.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var controller = Get.put(PlayerController());
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Get.put(PlayerController());
     return Scaffold(
         backgroundColor: bgDarkColor,
         appBar: AppBar(
