@@ -25,12 +25,12 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Center(
           child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               children: [
@@ -51,23 +51,11 @@ class _SplashState extends State<Splash> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                ShaderMask(
-                  shaderCallback: (bounds) =>
-                      const LinearGradient(colors: [Colors.red, Colors.yellow])
-                          .createShader(
-                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                  ),
-                  child: Text(
-                    "YELLA",
-                    style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
               ],
             ),
-            Spacer(),
+            SizedBox(
+              height: 300,
+            ),
             ShaderMask(
               shaderCallback: (bounds) =>
                   const LinearGradient(colors: [Colors.blue, Colors.yellow])
