@@ -87,13 +87,15 @@ class _HomePageState extends State<HomePage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),
                                 tileColor: bgColor,
-                                leading: QueryArtworkWidget(
-                                  id: snapshot.data![index].id,
-                                  type: ArtworkType.AUDIO,
-                                  nullArtworkWidget: const Icon(
-                                    Icons.music_note,
-                                    color: whiteColor,
-                                    size: 32,
+                                leading: CircleAvatar(
+                                  child: QueryArtworkWidget(
+                                    id: snapshot.data![index].id,
+                                    type: ArtworkType.AUDIO,
+                                    nullArtworkWidget: const Icon(
+                                      Icons.music_note,
+                                      color: whiteColor,
+                                      size: 32,
+                                    ),
                                   ),
                                 ),
                                 title: Text(
