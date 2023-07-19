@@ -23,7 +23,7 @@ class _PlayerPageState extends State<PlayerPage> {
       backgroundColor: bgColor,
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Obx(
           () => Column(
             children: [
@@ -35,10 +35,9 @@ class _PlayerPageState extends State<PlayerPage> {
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         height: 300,
                         width: 300,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.red,
-                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple[200],
+                            borderRadius: BorderRadius.circular(15)),
                         alignment: Alignment.center,
                         child: QueryArtworkWidget(
                           id: widget.data[controller.playIndex.value].id,
