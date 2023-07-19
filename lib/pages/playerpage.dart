@@ -20,7 +20,7 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.all(8.0),
